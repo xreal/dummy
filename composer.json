@@ -1,9 +1,9 @@
 {
-    "name": "omnipay/dummy",
+    "name": "omnipay/Targobank",
     "type": "library",
-    "description": "Dummy driver for the Omnipay payment processing library",
+    "description": "Targobank driver for the Omnipay payment processing library",
     "keywords": [
-        "dummy",
+        "targobank",
         "gateway",
         "merchant",
         "omnipay",
@@ -23,7 +23,7 @@
         }
     ],
     "autoload": {
-        "psr-4": { "Omnipay\\Dummy\\" : "src/" }
+        "psr-4": { "Omnipay\\Targobank\\" : "src/" }
     },
     "require": {
         "omnipay/common": "~2.0"

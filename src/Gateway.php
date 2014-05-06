@@ -1,41 +1,65 @@
-<?php
-
-namespace Omnipay\Dummy;
+<?php namespace Omnipay\Targobank;
 
 use Omnipay\Common\AbstractGateway;
-use Omnipay\Dummy\Message\AuthorizeRequest;
 
 /**
- * Dummy Gateway
- *
- * This gateway is useful for testing. It simply authorizes any payment made using a valid
- * credit card number and expiry.
- *
- * Any card number which passes the Luhn algorithm and ends in an even number is authorized,
- * for example: 4242424242424242
- *
- * Any card number which passes the Luhn algorithm and ends in an odd number is declined,
- * for example: 4111111111111111
+ * Class Gateway
+ * @package Omnipay\Targobank
  */
 class Gateway extends AbstractGateway
 {
     public function getName()
     {
-        return 'Dummy';
+        return 'Targobank';
     }
 
     public function getDefaultParameters()
     {
-        return array();
+        return array(
+            'dealerID' => '',
+            'dealerText' => '',
+            'koop_ID' => ''
+        );
+    }
+    public function getDealerId()
+    {
+        return $this->getParameter('dealerID');
     }
 
-    public function authorize(array $parameters = array())
+    public function setDealerId($value)
     {
-        return $this->createRequest('\Omnipay\Dummy\Message\AuthorizeRequest', $parameters);
+        return $this->setParameter('dealerID', $value);
     }
+
+    public function getDealerText()
+    {
+        return $this->getParameter('dealerText');
+    }
+
+    public function setDealerText($value)
+    {
+        return $this->setParameter('dealerText', $value);
+    }
+
+    public function getKoopId()
+    {
+        return $this->getParameter('koop_ID');
+    }
+
+    public function setKoopId($value)
+    {
+        return $this->setParameter('koop_ID', $value);
+    }
+
 
     public function purchase(array $parameters = array())
     {
-        return $this->authorize($parameters);
+        return $this->createRequest('\Omnipay\Targobank\Message\PurchaseRequest', $parameters);
     }
+
+    public function completePurchase(array $parameters = array())
+    {
+        return $this->createRequest('\Omnipay\Targobank\Message\CompletePurchaseRequest', $parameters);
+    }
+
 }
